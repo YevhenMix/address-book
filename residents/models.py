@@ -19,4 +19,4 @@ class Resident(models.Model):
         verbose_name = 'Житель'
         verbose_name_plural = 'Жители'
         unique_together = ('first_name', 'last_name')
-
+        ordering = ['first_name']
