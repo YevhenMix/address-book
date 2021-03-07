@@ -1,5 +1,4 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.db.models import Q
 from django.test import TestCase, Client
 from django.urls import reverse
 from residents.models import Resident
