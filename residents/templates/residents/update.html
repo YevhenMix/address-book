@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %} Добавить Жителя {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4 wrapper exmpl my-4">
+        <img src="/{{resident.photo}}">
+    </div>
+    <div class="col-md-8 my-4">
+        <h3 class="text-center mx-auto"> Данные о жителе</h3>
+        <h4 class="mx-4">Имя: {{resident.first_name}}</h4>
+        <h4 class="mx-4">Фамилия: {{resident.last_name}}</h4>
+        <h4 class="mx-4">Страна: {{resident.country}}</h4>
+        <h4 class="mx-4">Город: {{resident.city}}</h4>
+        <h4 class="mx-4">Улица: {{resident.street}}</h4>
+        <h4 class="mx-4">Номер телефона: {{resident.phone_number}}</h4>
+        <h4 class="mx-4">Сайт: <a href="{{resident.url}}">{{resident.url}}</a></h4>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Редактировать Жителя
+      </a>
+      <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Удалить жителя
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> Удаление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Точно хотите удалить жителя?
+              </div>
+              <div class="modal-footer">
+                  <form  action="{% url 'residents:delete' pk=resident.id %}" method="post"> {% csrf_token %}
+                      <input class="btn btn-danger mx-2" type="submit" value="Да, удалить">
+                  </form>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Нет, отсавить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <form  action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+            {{form.as_p}}
+            <input class="btn btn-success my-4 mx-2" type="submit" value="Сохранить">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
